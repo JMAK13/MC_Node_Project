@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta id="start" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Tag -->
+    <title>MC Node Interface App</title>
+    
+    <style>
+
+      #wrapper{
+        list-style: none;
+        width: 100%;
+        height: 50%;
+        max-height: 50%;
+        padding: 0;
+        margin: 0;
+      }
+
+      #main {
+        width: 100%;
+        height: 400px;
+        max-height: 50%;
+        overflow-y: auto;
+        background: black;
+        color: white;
+        list-style: none;
+        padding-left: 1.5%;
+        padding-top: 1%
+      }
+
+      h2 {
+        margin: 0;
+        padding-left: 5%;
+      }
+
+    </style>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../styles/bootstrap.min.css">
+    
+  </head>
+  <body style="height: 100%;">
+
+      <!-- Main Content -->
+      <div class="container h-50">
+        <h2>Server Chat</h2>
+        <div id="wrapper">
+          <ol id="main">
+            <% for(var i = 0; i < mess.length; i++) { %>
+              <li> <%= mess[i] %></li> 
+            <% } %>
+          </ol>
+        </div>
+      </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/socket.io.js"></script>
+    <script>
+        // Socket.io Event Handler (Updates Page Dynamically)
+        var socket = io.connect('http://localhost');
+        socket.on('update', function (data) {
+          var node = document.createElement("LI");
+          node.setAttribute('id', data.size);
+          var m = document.createTextNode(data);
+          node.appendChild(m);
+          document.getElementById("main").appendChild(node);
+          window.location.href = '#'+data.size;
+        });
+      </script>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+nodecom.test:
+       description: Basic test command.
+       default: true
